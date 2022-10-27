@@ -41,8 +41,7 @@ public class ReportDecoder {
 			for (String line : dataCopy) {
 				if (line.charAt(pos) == '0') {
 					zeros++;
-				}
-				else if (line.charAt(pos) == '1') {
+				} else if (line.charAt(pos) == '1') {
 					ones++;
 				}
 			}
@@ -53,16 +52,12 @@ public class ReportDecoder {
 			// Remove the required bits from the copied data
 			for (int line = dataCopy.size() - 1; line >= 0; line--) {
 				// Oxygen rate is determined by only keeping the values with the most common bits
-				if (rateType == RateType.OXYGEN) {
-					if (dataCopy.get(line).charAt(pos) != commonBit) {
-						dataCopy.remove(line);
-					}
+				if (rateType == RateType.OXYGEN && dataCopy.get(line).charAt(pos) != commonBit) {
+					dataCopy.remove(line);
 				}
 				// CO2 rate is determined by only keeping the values with the least common bits
-				else if (rateType == RateType.CO2) {
-					if (dataCopy.get(line).charAt(pos) == commonBit) {
-						dataCopy.remove(line);
-					}
+				else if (rateType == RateType.CO2 && dataCopy.get(line).charAt(pos) == commonBit) {
+					dataCopy.remove(line);
 				}
 			}
 		}

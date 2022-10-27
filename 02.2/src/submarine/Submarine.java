@@ -6,7 +6,7 @@ package submarine;
  *
  */
 public class Submarine {
-	// Pos, depth and aim start at default value 0
+	// pos, depth and aim start at default value 0
 	private int pos;
 	private int depth;
 	private int aim;

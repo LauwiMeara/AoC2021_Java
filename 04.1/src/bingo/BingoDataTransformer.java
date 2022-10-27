@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.stream.Stream;
 
 /**
- * Class to transform bingo data
+ * Class to transform bingo data.
  * @author Laura Luijben
  *
  */
-public class BingoTransformer {
+public class BingoDataTransformer {
 	private final int BINGO_SIZE = 5;
 	private List<String> data;
 	
-	public BingoTransformer(List<String> data) {
+	public BingoDataTransformer(List<String> data) {
 		this.data = data;
 	}
 	

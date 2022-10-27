@@ -1,5 +1,6 @@
 package bingo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,9 +14,11 @@ public class BingoGame {
 	
 	private int[] draws;
 	private List<int[][]> cards;
-	private int[][] winningCard;
-	// round and isGameOver start at default values, 0 and false respectively
+	private ArrayList<Integer> indexesWinningCards = new ArrayList<>();
+	private int[][] losingCard;
+	// round, isWon and isGameOver start at default values, 0, false and false respectively
 	private int round;
+	private boolean isWon;
 	private boolean isGameOver;
 	
 	public BingoGame(int[] draws, List<int[][]> cards) {
@@ -27,17 +30,25 @@ public class BingoGame {
 		return round;
 	}
 	
-	public int[][] getWinningCard() {
-		return winningCard;
+	public int[][] getLosingCard() {
+		return losingCard;
 	}
 	
 	/**
 	 * Draws and checks for the winner until the game is won.
 	 */
 	public void play() {
-		while (!isGameOver) {
-			draw();
-			checkWinner();
+		while(!isGameOver) {
+			while (!isWon) {
+				draw();
+				checkWinners();
+			}
+			if (cards.size() > 1) {
+				removeWinners();
+			} else {
+				isGameOver = true;
+				losingCard = cards.get(0);
+			}
 		}
 	}
 	
@@ -62,15 +73,14 @@ public class BingoGame {
 	}
 	
 	/**
-	 * Checks if the game is won. In other words: if a card has a completely marked row or column.
+	 * Checks if one or more cards have won. In other words: if a card has a completely marked row or column.
 	 */
-	private void checkWinner() {
+	private void checkWinners() {
 		for (int cardNumber = 0; cardNumber < cards.size(); cardNumber++) {
 			int[][] card = cards.get(cardNumber);
 			if (hasMarkedRow(card) || hasMarkedColumn(card)) {
-				winningCard = card;
-				isGameOver = true;
-				break;
+				indexesWinningCards.add(cardNumber);
+				isWon = true;
 			}
 		}
 	}
@@ -121,5 +131,17 @@ public class BingoGame {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Removes the winning card from the cards list.
+	 */
+	private void removeWinners() {
+		for (int i = indexesWinningCards.size() - 1; i >= 0; i--) {
+			int cardNumber = indexesWinningCards.get(i);
+			cards.remove(cardNumber);
+		}
+		indexesWinningCards.clear();
+		isWon = false;
 	}
 }

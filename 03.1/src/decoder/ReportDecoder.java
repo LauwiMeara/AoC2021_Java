@@ -31,8 +31,7 @@ public class ReportDecoder {
 			for (String line : data) {
 				if (line.charAt(pos) == '0') {
 					zeros++;
-				}
-				else if (line.charAt(pos) == '1') {
+				} else if (line.charAt(pos) == '1') {
 					ones++;
 				}
 			}
@@ -41,8 +40,7 @@ public class ReportDecoder {
 			if (rateType == RateType.EPSILON) {
 				if (zeros < ones) {
 					rate += '0';
-				}
-				else {
+				} else {
 					rate += '1';
 				}
 			}
@@ -50,8 +48,7 @@ public class ReportDecoder {
 			else if (rateType == RateType.GAMMA) {
 				if (zeros > ones) {
 					rate += '0';
-				}
-				else {
+				} else {
 					rate += '1';
 				}
 			}
