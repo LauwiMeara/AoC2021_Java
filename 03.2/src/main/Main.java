@@ -8,7 +8,7 @@ import utils.FileTransformer;
 
 public class Main {
 	public static void main(String[] args) throws FileNotFoundException {
-		// Transform txt file to ArrayList
+		// Transform txt file to List
 		String path = Main.class.getResource("../input/input.txt").getFile();
 	    List<String> data = FileTransformer.fileToList(path);
 	    

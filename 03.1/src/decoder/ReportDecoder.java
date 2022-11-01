@@ -36,16 +36,15 @@ public class ReportDecoder {
 				}
 			}
 			
-			// Epsilon rate consists of least common bits.
 			if (rateType == RateType.EPSILON) {
+				// Epsilon rate consists of least common bits.
 				if (zeros < ones) {
 					rate += '0';
 				} else {
 					rate += '1';
 				}
-			}
-			// Gamma rate consists of most common bits
-			else if (rateType == RateType.GAMMA) {
+			} else if (rateType == RateType.GAMMA) {
+				// Gamma rate consists of most common bits
 				if (zeros > ones) {
 					rate += '0';
 				} else {
