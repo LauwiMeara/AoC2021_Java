@@ -51,10 +51,10 @@ public class VentSystem {
 		ArrayList<Pair> ventCoords = vent.getCoords();
 		for (int i = 0; i < ventCoords.size(); i++) {
 			Pair coords = ventCoords.get(i);
-			if (this.ventRegister.containsKey(coords)) {
-				this.ventRegister.put(coords, this.ventRegister.get(coords) + 1);
+			if (ventRegister.containsKey(coords)) {
+				ventRegister.put(coords, ventRegister.get(coords) + 1);
 			} else {
-				this.ventRegister.put(coords,  1);
+				ventRegister.put(coords,  1);
 			}
 		}
 	}

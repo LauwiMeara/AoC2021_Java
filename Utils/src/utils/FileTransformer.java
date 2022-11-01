@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 /**
  * Class to read txt files and transform them in ArrayLists.
@@ -12,17 +13,6 @@ import java.util.Scanner;
  *
  */
 public class FileTransformer {
-	
-	/**
-	 * Transforms a txt file into a list of Integers.
-	 * @param path	The path to the txt file.
-	 * @return		The data in a list.
-	 * @throws FileNotFoundException
-	 */
-	public static List<Integer> fileToIntList(String path) throws FileNotFoundException {
-		List<String> list = fileToList(path);
-		return list.stream().mapToInt(Integer::parseInt).boxed().toList();
-	}
 	
 	/**
 	 * Transforms a txt file into a list of Strings.
@@ -45,6 +35,29 @@ public class FileTransformer {
 			e.printStackTrace();
 			throw new FileNotFoundException("Input file doesn't exist.");
 		}
+	}
+	
+	/**
+	 * Transforms a txt file into a list of Integers.
+	 * @param path	The path to the txt file.
+	 * @return		The data in a list.
+	 * @throws FileNotFoundException
+	 */
+	public static List<Integer> fileToIntList(String path) throws FileNotFoundException {
+		List<String> list = fileToList(path);
+		return list.stream().mapToInt(Integer::parseInt).boxed().toList();
+	}
+	
+	/**
+	 * Transforms a txt file into an array of Strings, which were divided by a given separator.
+	 * @param path		The path to the txt file.
+	 * @param separator	The substring to separate the strings.
+	 * @return			The data in an array.
+	 * @throws FileNotFoundException
+	 */
+	public static String[] fileToArray(String path, String separator) throws FileNotFoundException {
+		List<String> list = fileToList(path);
+		return list.stream().flatMap(line -> Stream.of(line.split(separator))).toArray(size -> new String[size]);
 	}
 	
 	/**
